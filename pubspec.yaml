@@ -6,6 +6,7 @@ environment:
   sdk: '>=3.0.5 <4.0.0'
 
 dependencies:
+  lottie: ^2.4.0
   http: ^1.1.0
   flutter:
     sdk: flutter
@@ -20,4 +21,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/lotties/
 
