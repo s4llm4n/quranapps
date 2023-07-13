@@ -40,5 +40,5 @@ void main() async {
   // data dari api  (raw data) -> Model (yang sudah disiapin)
   DetailSurah annas = DetailSurah.fromJson(dataAnnas);
 
-  print(annas);
+  print(annas.verses[0].text.arab);
 }
