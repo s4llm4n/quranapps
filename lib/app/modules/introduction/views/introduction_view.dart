@@ -36,7 +36,7 @@ class IntroductionView extends GetView<IntroductionController> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+             SizedBox(height: 10),
             Container(
               width: 250,
               height: 250,
