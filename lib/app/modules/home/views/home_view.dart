@@ -1,9 +1,10 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unnecessary_string_interpolations
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:quranapps/app/data/models/surah.dart';
+import 'package:quranapps/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -33,12 +34,15 @@ class HomeView extends GetView<HomeController> {
                 itemBuilder: (context, index) {
                   Surah surah = snapshot.data![index];
                   return ListTile(
+                    onTap: () {
+                      Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
+                    },
                     leading: CircleAvatar(
                       child: Text("${surah.number}"),
                     ),
-                    title: Text("${surah.name?.transliteration?.id ?? 'Error..'}"),
-                    subtitle: Text("${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? 'Error..'}"),
-                    trailing: Text("${surah.name?.short ?? 'Error..'}"),
+                    title: Text("${surah.name.transliteration.id}"),
+                    subtitle: Text("${surah.numberOfVerses} Ayat | ${surah.revelation.id}"),
+                    trailing: Text("${surah.name.short}"),
                   );
                 });
           }),

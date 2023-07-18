@@ -9,7 +9,7 @@ class HomeController extends GetxController {
     Uri url = Uri.parse("https://api.quran.gading.dev/surah");
     var res = await http.get(url);
 
-    List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
+    List? data = (json.decode(res.body) as Map<String, dynamic>)["data"];
 
     if (data == null || data.isEmpty) {
       return [];
