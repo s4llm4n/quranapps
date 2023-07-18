@@ -9,14 +9,6 @@ DetailSurah detailSurahFromJson(String str) =>
 String detailSurahToJson(DetailSurah data) => json.encode(data.toJson());
 
 class DetailSurah {
-  int number;
-  int sequence;
-  int numberOfVerses;
-  Name name;
-  Revelation revelation;
-  DataTafsir tafsir;
-  PreBismillah preBismillah;
-  List<Verse> verses;
 
   DetailSurah({
     required this.number,
@@ -29,26 +21,37 @@ class DetailSurah {
     required this.verses,
   });
 
+  int? number;
+  int? sequence;
+  int? numberOfVerses;
+  Name? name;
+  Revelation? revelation;
+  DataTafsir? tafsir;
+  PreBismillah? preBismillah;
+  List<Verse>? verses;
+
   factory DetailSurah.fromJson(Map<String, dynamic> json) => DetailSurah(
         number: json["number"],
         sequence: json["sequence"],
         numberOfVerses: json["numberOfVerses"],
-        name: Name.fromJson(json["name"]),
-        revelation: Revelation.fromJson(json["revelation"]),
-        tafsir: DataTafsir.fromJson(json["tafsir"]),
-        preBismillah: PreBismillah.fromJson(json["preBismillah"]),
-        verses: List<Verse>.from(json["verses"].map((x) => Verse.fromJson(x))),
+        name: json["name"] == null ? null : Name.fromJson(json["name"]),
+        revelation: json["revelation"] == null ? null : Revelation.fromJson(json["revelation"]),
+        tafsir: json["tafsir"] == null ? null : DataTafsir.fromJson(json["tafsir"]),
+        preBismillah: json["preBismillah"] == null ? null : PreBismillah.fromJson(json["preBismillah"]),
+        verses: json["verses"] == null
+            ? []
+            : List<Verse>.from(json["verses"].map((x) => Verse.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "number": number,
         "sequence": sequence,
         "numberOfVerses": numberOfVerses,
-        "name": name.toJson(),
-        "revelation": revelation.toJson(),
-        "tafsir": tafsir.toJson(),
-        "preBismillah": preBismillah.toJson(),
-        "verses": List<dynamic>.from(verses.map((x) => x.toJson())),
+        "name": name?.toJson(),
+        "revelation": revelation?.toJson(),
+        "tafsir": tafsir?.toJson(),
+        "preBismillah": preBismillah?.toJson(),
+        "verses": verses == null ? null : List<dynamic>.from(verses!.map((x) => x.toJson())),
       };
 }
 

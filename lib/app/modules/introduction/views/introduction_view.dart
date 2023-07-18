@@ -41,7 +41,7 @@ class IntroductionView extends GetView<IntroductionController> {
               width: 250,
               height: 250,
               child: Lottie.asset(
-                "lotties/animasi-quran.json",
+                "assets/lotties/animasi-quran.json",
               ),
             ),
             SizedBox(height: 30),
