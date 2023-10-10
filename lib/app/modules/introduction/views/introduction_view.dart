@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quranapps/app/contants/color.dart';
 import 'package:quranapps/app/routes/app_pages.dart';
 
 import '../controllers/introduction_controller.dart';
@@ -14,18 +14,19 @@ class IntroductionView extends GetView<IntroductionController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Al-Qurran Apps',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
+                color: appPurple,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 40,
               ),
               child: Text(
@@ -33,10 +34,11 @@ class IntroductionView extends GetView<IntroductionController> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
+                  color: Colors.grey,
                 ),
               ),
             ),
-             SizedBox(height: 10),
+             const SizedBox(height: 10),
             Container(
               width: 250,
               height: 250,
@@ -44,10 +46,13 @@ class IntroductionView extends GetView<IntroductionController> {
                 "assets/lotties/animasi-quran.json",
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () => Get.offAllNamed(Routes.HOME),
-              child: Text('Mulai'),
+              child: const Text('Mulai'),
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF431AA1)
+              ),
             ),
           ],
         ),

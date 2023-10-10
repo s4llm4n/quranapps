@@ -1,44 +1,23 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:quranapps/app/data/models/detail_surah.dart';
-import 'package:quranapps/app/data/models/surah.dart';
+import 'package:quranapps/app/data/models/ayat.dart';
 
 void main() async {
-  // Uri url = Uri.parse("https://api.quran.gading.dev/surah");
-  // var res = await http.get(url);
+  // ignore: unused_local_variable
+  var res = await http.get(Uri.parse("https://api.quran.gading.dev/surah/108/2"));
+  Map<String, dynamic> data = json.decode(res.body)["data"];
+  Map<String, dynamic> dataToModel = {
+    "number": data["number"],
+    "meta": data["meta"],
+    "text": data["text"],
+    "translation": data["translation"],
+    // "audio": data["audio"],
+    "tafsir": data["tafsir"],
+  };
 
-  // List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
+  // convert Map -> Model Ayat
+  Ayat ayat = Ayat.fromJson(dataToModel);
 
-  // print(data[113]["number"]);
-
-  // data dari api  (raw data) -> Model (yang sudah disiapin)
-  // Surah surahAnnas = Surah.fromJson(data[113]);
-
-  // print(surahAnnas.name);
-  // print('===========');
-  // print(surahAnnas.number);
-  // print('===========');
-  // print(surahAnnas.numberOfVerses);
-  // print('===========');
-  // print(surahAnnas.revelation);
-  // print('===========');
-  // print(surahAnnas.sequence);
-  // print('===========');
-  // print(surahAnnas.tafsir);
-
-  // INI COBA MASUKK KE NESTED MODEL
-  // print(surahAnnas.name.long);
-
-  // Uri urlAnnas =
-  //     Uri.parse("https://api.quran.gading.dev/surah/${surahAnnas.number}");
-  // var resAnnas = await http.get(urlAnnas);
-
-  // Map<String, dynamic> dataAnnas =
-  //     (json.decode(resAnnas.body) as Map<String, dynamic>)["data"];
-
-  // data dari api  (raw data) -> Model (yang sudah disiapin)
-  // DetailSurah annas = DetailSurah.fromJson(dataAnnas);
-
-  // print(annas.verses[0].text.arab);
+  print(ayat.tafsir?.id?.short);
 }

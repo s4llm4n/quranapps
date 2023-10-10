@@ -9,8 +9,7 @@ class DetailSurahController extends GetxController {
     Uri url = Uri.parse("https://api.quran.gading.dev/surah/$id");
     var res = await http.get(url);
 
-    Map<String, dynamic> data =
-        (json.decode(res.body) as Map<String, dynamic>)["data"];
+    Map<String, dynamic> data = (json.decode(res.body) as Map<String, dynamic>)["data"];
 
     return DetailSurah.fromJson(data);
   }
