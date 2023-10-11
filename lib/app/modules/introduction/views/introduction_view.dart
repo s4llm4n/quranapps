@@ -19,7 +19,6 @@ class IntroductionView extends GetView<IntroductionController> {
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
-                color: appPurple,
               ),
             ),
             const SizedBox(
@@ -34,24 +33,29 @@ class IntroductionView extends GetView<IntroductionController> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.grey,
                 ),
               ),
             ),
-             const SizedBox(height: 10),
-            Container(
-              width: 250,
-              height: 250,
-              child: Lottie.asset(
-                "assets/lotties/animasi-quran.json",
+             const SizedBox(height: 20),
+            ClipRRect(
+              child: Container(
+                width: 250,
+                height: 250,
+                child: Lottie.asset(
+                  "assets/lotties/animasi-quran.json",
+                ),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             ElevatedButton(
               onPressed: () => Get.offAllNamed(Routes.HOME),
               child: const Text('Mulai'),
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF431AA1)
+                primary: const Color(0xFF431AA1),
+              padding: EdgeInsets.symmetric(
+                horizontal: 50,
+                vertical: 15,
+              ),
               ),
             ),
           ],
