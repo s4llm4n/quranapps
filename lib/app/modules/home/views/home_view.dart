@@ -40,6 +40,25 @@ class HomeView extends GetView<HomeController> {
             Container(
               height: 150,
               width: Get.width,
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: -50,
+                    right: 0,
+                    child: Opacity(
+                      opacity: 0.7,
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        child: Image.asset(
+                          "assets/images/alquran.png",
+                          fit: BoxFit.contain,
+                          ),
+                      ),
+                    ),
+                    ),
+                ],
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 gradient: LinearGradient(
