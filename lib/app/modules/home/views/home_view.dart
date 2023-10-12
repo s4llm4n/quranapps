@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unnecessary_string_interpolations
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, unnecessary_string_interpolations, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 
@@ -38,34 +38,80 @@ class HomeView extends GetView<HomeController> {
             ),
             SizedBox(height: 20,),
             Container(
-              height: 150,
-              width: Get.width,
-              child: Stack(
-                children: [
-                  Positioned(
-                    bottom: -50,
-                    right: 0,
-                    child: Opacity(
-                      opacity: 0.7,
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        child: Image.asset(
-                          "assets/images/alquran.png",
-                          fit: BoxFit.contain,
-                          ),
-                      ),
-                    ),
-                    ),
-                ],
-              ),
               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: LinearGradient(
+                    colors: [
+                      appPurpleLight1,
+                      appPurpleDark,
+                    ],
+                  ),
+                ),
+              child: Material(
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
-                  colors: [
-                    appPurpleLight2,
-                    appPurpleDark,
-                  ],
+                child: InkWell(
+                  onTap: () {},
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          bottom: -50,
+                          right: 0,
+                          child: Opacity(
+                            opacity: 0.7,
+                            child: Container(
+                              width: 200,
+                              height: 200,
+                              child: Image.asset(
+                                "assets/images/alquran.png",
+                                fit: BoxFit.contain,
+                                ),
+                            ),
+                          ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.menu_book_rounded,
+                                      color: appWhite,
+                                    ),
+                                    SizedBox(width: 10,),
+                                    Text(
+                                      "Terakhir dibaca",
+                                      style: TextStyle(
+                                        color: appWhite,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 30,),
+                                Text(
+                                  "Al-Fatihah",
+                                  style: TextStyle(
+                                    color: appWhite,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                  "Juz 1 | Ayat 5",
+                                  style: TextStyle(
+                                    color: appWhite,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
