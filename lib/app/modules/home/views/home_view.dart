@@ -13,7 +13,6 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
       appBar: AppBar(
         title: Text('My Quran'),
         centerTitle: true,
@@ -119,54 +118,71 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               TabBar(
+                indicatorColor: appPurpleDark,
+                labelColor: appPurpleDark,
+                unselectedLabelColor: Colors.grey,
                 tabs: [
                   Tab(
-                    text: "Tab 1",
+                   text: "Surah",
                   ),
-                   Tab(
-                    text: "Tab 2",
-                  ),
-                   Tab(
-                    text: "Tab 3",
+                  Tab(
+                    text: "Juz",
+                   ),
+                  Tab(
+                    text: "Bookmark",
                   ),
                 ],
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    FutureBuilder<List<Surah>>(
+          future: controller.getAllSurah(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  Surah surah = snapshot.data![index];
+                  return ListTile(
+                    onTap: () {
+                      Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
+                    },
+                    leading: Container(
+                      height: 35,
+                      width: 35,
+                      color: Colors.amber,
+                      child: Image.asset(
+                        "assets/images/list_light.png",
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    title: Text("${surah.name?.transliteration?.id} ?? Error.."),
+                    subtitle: Text("${surah.numberOfVerses} Ayat | ${surah.revelation?.id}"),
+                    trailing: Text("${surah.name?.short}"),
+                  );
+                },
+              );
+          },
+        ),
+                    Center(child: Text("page 2"),),
+                    Center(child: Text("page 3"),),
+                  ],
+                ),
               ),
             ],
           ),
         ),
       ),
-
-      // body: FutureBuilder<List<Surah>>(
-      //     future: controller.getAllSurah(),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.connectionState == ConnectionState.waiting) {
-      //         return Center(
-      //           child: CircularProgressIndicator(),
-      //         );
-      //       }
-      //       if (!snapshot.hasData) {
-      //         return Center(
-      //           child: CircularProgressIndicator(),
-      //         );
-      //       }
-      //       return ListView.builder(
-      //           itemCount: snapshot.data!.length,
-      //           itemBuilder: (context, index) {
-      //             Surah surah = snapshot.data![index];
-      //             return ListTile(
-      //               onTap: () {
-      //                 Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
-      //               },
-      //               leading: CircleAvatar(
-      //                 child: Text("${surah.number}"),
-      //               ),
-      //               title: Text("${surah.name?.transliteration?.id}"),
-      //               subtitle: Text("${surah.numberOfVerses} Ayat | ${surah.revelation?.id}"),
-      //               trailing: Text("${surah.name?.short}"),
-      //             );
-      //           });
-      //     },
-      //   ),
     );
   }
 }
