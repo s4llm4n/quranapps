@@ -13,109 +13,126 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar: AppBar(
         title: Text('My Quran'),
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {}, 
+            onPressed: () => Get.toNamed(Routes.SEARCH), 
             icon: Icon(Icons.search),
           ),
         ],
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Assalamualaikum',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(
-                    colors: [
-                      appPurpleLight1,
-                      appPurpleDark,
-                    ],
-                  ),
+      body: DefaultTabController(
+        length: 3,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Assalamualaikum',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-              child: Material(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
-                child: InkWell(
-                  onTap: () {},
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                      colors: [
+                        appPurpleLight1,
+                        appPurpleDark,
+                      ],
+                    ),
+                  ),
+                child: Material(
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          bottom: -50,
-                          right: 0,
-                          child: Opacity(
-                            opacity: 0.7,
-                            child: Container(
-                              width: 200,
-                              height: 200,
-                              child: Image.asset(
-                                "assets/images/alquran.png",
-                                fit: BoxFit.contain,
-                                ),
+                  child: InkWell(
+                    onTap: () => Get.toNamed(Routes.LAST_READ),
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            bottom: -50,
+                            right: 0,
+                            child: Opacity(
+                              opacity: 0.7,
+                              child: Container(
+                                width: 200,
+                                height: 200,
+                                child: Image.asset(
+                                  "assets/images/alquran.png",
+                                  fit: BoxFit.contain,
+                                  ),
+                              ),
                             ),
-                          ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.menu_book_rounded,
-                                      color: appWhite,
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Text(
-                                      "Terakhir dibaca",
-                                      style: TextStyle(
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.menu_book_rounded,
                                         color: appWhite,
                                       ),
+                                      SizedBox(width: 10,),
+                                      Text(
+                                        "Terakhir dibaca",
+                                        style: TextStyle(
+                                          color: appWhite,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 30,),
+                                  Text(
+                                    "Al-Fatihah",
+                                    style: TextStyle(
+                                      color: appWhite,
+                                      fontSize: 20,
                                     ),
-                                  ],
-                                ),
-                                SizedBox(height: 30,),
-                                Text(
-                                  "Al-Fatihah",
-                                  style: TextStyle(
-                                    color: appWhite,
-                                    fontSize: 20,
                                   ),
-                                ),
-                                Text(
-                                  "Juz 1 | Ayat 5",
-                                  style: TextStyle(
-                                    color: appWhite,
-                                    fontSize: 20,
+                                  Text(
+                                    "Juz 1 | Ayat 5",
+                                    style: TextStyle(
+                                      color: appWhite,
+                                      fontSize: 20,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+              TabBar(
+                tabs: [
+                  Tab(
+                    text: "Tab 1",
+                  ),
+                   Tab(
+                    text: "Tab 2",
+                  ),
+                   Tab(
+                    text: "Tab 3",
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
 
