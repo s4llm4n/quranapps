@@ -12,6 +12,7 @@ dependencies:
   get: any
   get_cli: ^1.8.1
   get_storage: 2.1.1
+  just_audio: 0.9.35
   flutter: 
     sdk: flutter
 
