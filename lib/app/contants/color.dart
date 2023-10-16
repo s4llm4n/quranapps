@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 const appPurple = Color(0xFF431AA1);
@@ -8,24 +10,70 @@ const appWhite = Color(0xFFFAF8FC);
 const appOrange = Color(0xFFE6704A);
 
 ThemeData themeLight = ThemeData(
+  brightness: Brightness.light,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: appPurpleDark,
+  ),
   primaryColor: appPurple,
-  scaffoldBackgroundColor: appWhite,
+  scaffoldBackgroundColor: Colors.white,
   appBarTheme: AppBarTheme(
+    elevation: 4,
     backgroundColor: appPurple,
+  ),
+  textTheme: TextTheme(
+    bodyLarge: TextStyle(
+      color: appPurpleDark,
+    ),
+    bodyMedium: TextStyle(
+      color: appPurpleDark,
+    ),
+  ),
+  listTileTheme: ListTileThemeData(
+    textColor: appPurpleDark,
+  ),
+  tabBarTheme: TabBarTheme(
+    labelColor: appPurpleDark,
+    unselectedLabelColor: Colors.grey,
+    indicator: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          color: appPurpleDark,
+        ),
+      ),
+    ),
   ),
 );
 ThemeData themeDark = ThemeData(
+  brightness: Brightness.dark,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: appWhite,
+  ),
   primaryColor: appPurple,
   scaffoldBackgroundColor: appPurpleDark,
   appBarTheme: AppBarTheme(
+    elevation: 0,
     backgroundColor: appPurpleDark,
   ),
   textTheme: TextTheme(
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       color: appWhite,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       color: appWhite,
+    ),
+  ),
+  listTileTheme: ListTileThemeData(
+    textColor: appWhite,
+  ),
+  tabBarTheme: TabBarTheme(
+    labelColor: appWhite,
+    unselectedLabelColor: Colors.grey,
+    indicator: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          color: appWhite,
+        ),
+      ),
     ),
   ),
 );
