@@ -15,7 +15,8 @@ class DetailSurahView extends GetView<DetailSurahController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SURAH ${surah.name?.transliteration?.id?.toUpperCase() ?? 'Error...'}'),
+        title: Text(
+            'SURAH ${surah.name?.transliteration?.id?.toUpperCase() ?? 'Error...'}'),
         centerTitle: true,
       ),
       body: ListView(
@@ -31,7 +32,9 @@ class DetailSurahView extends GetView<DetailSurahController> {
                   padding: EdgeInsets.all(25),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Get.isDarkMode ? appPurpleLight2.withOpacity(0.3) : appWhite,
+                    color: Get.isDarkMode
+                        ? appPurpleLight2.withOpacity(0.3)
+                        : appWhite,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -43,7 +46,9 @@ class DetailSurahView extends GetView<DetailSurahController> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Text(
                         "${surah.tafsir?.id ?? 'Data tafsir tidak ada.'}",
                         textAlign: TextAlign.justify,
@@ -56,19 +61,18 @@ class DetailSurahView extends GetView<DetailSurahController> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
-                  colors: [
-                    appPurpleLight1,
-                    appPurpleDark,
-                  ]
-                ),
+                gradient: LinearGradient(colors: [
+                  appPurpleLight1,
+                  appPurpleDark,
+                ]),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
                     Text(
-                      surah.name?.transliteration?.id?.toUpperCase() ?? 'Error..',
+                      surah.name?.transliteration?.id?.toUpperCase() ??
+                          'Error..',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -84,7 +88,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                       ),
                     ),
                     Text(
-                      '${surah.numberOfVerses ?? 'Error..'} Ayat | ${surah.revelation?.id}', 
+                      '${surah.numberOfVerses ?? 'Error..'} Ayat | ${surah.revelation?.id}',
                       style: TextStyle(
                         fontSize: 16,
                         color: appWhite,
@@ -141,7 +145,9 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                 width: 40,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(Get.isDarkMode ? "assets/images/list_dark.png" : "assets/images/list_light.png"),
+                                    image: AssetImage(Get.isDarkMode
+                                        ? "assets/images/list_dark.png"
+                                        : "assets/images/list_light.png"),
                                     fit: BoxFit.contain,
                                   ),
                                 ),
@@ -149,19 +155,50 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                   child: Text("${index + 1}"),
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.bookmark_add_outlined),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      controller.playAudio(ayat?.audio?.primary);
-                                    },
-                                    icon: Icon(Icons.play_arrow),
-                                  ),
-                                ],
+                              GetBuilder<DetailSurahController>(
+                                builder: (c) => Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.bookmark_add_outlined),
+                                    ),
+                                    // Kondisi => Stop => button play
+                                    // Kondisi => playing => button pause & button stop
+                                    //kondisi => pause => button resume & button stop
+                                    (ayat?.kondisiAudio == "stop")
+                                        ? IconButton(
+                                            onPressed: () {
+                                              c.playAudio(ayat);
+                                            },
+                                            icon: Icon(Icons.play_arrow),
+                                          )
+                                        : Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              (ayat?.kondisiAudio == "playing")
+                                                  ? IconButton(
+                                                      onPressed: () {
+                                                        c.pauseAudio(ayat!);
+                                                      },
+                                                      icon: Icon(Icons.pause),
+                                                    )
+                                                  : IconButton(
+                                                      onPressed: () {
+                                                        c.resumeAudio(ayat!);
+                                                      },
+                                                      icon: Icon(
+                                                          Icons.play_arrow),
+                                                    ),
+                                              IconButton(
+                                                onPressed: () {
+                                                  c.stopAudio(ayat!);
+                                                },
+                                                icon: Icon(Icons.stop),
+                                              ),
+                                            ],
+                                          ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -180,9 +217,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                         "${ayat.text?.transliteration?.en}",
                         textAlign: TextAlign.end,
                         style: TextStyle(
-                          fontSize: 18,
-                          fontStyle: FontStyle.italic
-                        ),
+                            fontSize: 18, fontStyle: FontStyle.italic),
                       ),
                       SizedBox(height: 20),
                       Text(
